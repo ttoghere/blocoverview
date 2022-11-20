@@ -1,15 +1,15 @@
 // import 'package:blocoverview/blocs/theme/theme_bloc.dart';
 import 'package:blocoverview/blocs/color_bloc/color_bloc.dart';
-import 'package:blocoverview/cubits/color_cubit/color_cubit.dart';
-import 'package:blocoverview/cubits/theme_cubit/theme_cubit.dart';
 import 'package:blocoverview/screens/bloc_com_homepage.dart';
-import 'package:blocoverview/screens/cubit_com_homepage.dart';
-import 'package:blocoverview/screens/event_homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:blocoverview/blocs/counter_bloc/counter_bloc_bloc.dart';
 import 'package:blocoverview/screens/homepage.dart';
 import 'package:blocoverview/cubits/counter_cubit/counter_cubit.dart';
+import 'package:blocoverview/screens/cubit_com_homepage.dart';
+import 'package:blocoverview/screens/event_homepage.dart';
+import 'package:blocoverview/cubits/color_cubit/color_cubit.dart';
+import 'package:blocoverview/cubits/theme_cubit/theme_cubit.dart';
 
 void main() {
   //Bloc karmaşık yapılarda kullanılır
@@ -17,7 +17,7 @@ void main() {
   runApp(MyApp());
 }
 
-// Cubit ve Cubit iletişimi metotları
+// Bloc ve Bloc iletişimi metotları
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -27,9 +27,7 @@ class MyApp extends StatelessWidget {
           create: (context) => ColorBloc(),
         ),
         BlocProvider<CounterBlocBloc>(
-          create: (context) => CounterBlocBloc(
-            colorBloc: context.read<ColorBloc>(),
-          ),
+          create: (context) => CounterBlocBloc(),
         ),
       ],
       child: MaterialApp(
@@ -41,6 +39,30 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+// // Bloc ve Bloc iletişimi metotları
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MultiBlocProvider(
+//       providers: [
+//         BlocProvider<ColorBloc>(
+//           create: (context) => ColorBloc(),
+//         ),
+//         BlocProvider<CounterBlocBloc>(
+//           create: (context) => CounterBlocBloc(
+//             colorBloc: context.read<ColorBloc>(),
+//           ),
+//         ),
+//       ],
+//       child: MaterialApp(
+//         debugShowCheckedModeBanner: false,
+//         theme: ThemeData(),
+//         title: 'Cubit to Cubit',
+//         home: BlocComHomepage(),
+//       ),
+//     );
+//   }
+// }
 
 // // Cubit ve BuildContext metotları
 // class MyApp extends StatelessWidget {
