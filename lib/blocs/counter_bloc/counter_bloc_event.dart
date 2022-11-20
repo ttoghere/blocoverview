@@ -10,3 +10,5 @@ abstract class CounterBlocEvent extends Equatable {
 class IncrementCounterEvent extends CounterBlocEvent {}
 
 class DecrementCounterEvent extends CounterBlocEvent {}
+
+class ChangeCounterEvent extends CounterBlocEvent {}

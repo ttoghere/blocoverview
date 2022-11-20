@@ -1,6 +1,8 @@
 // import 'package:blocoverview/blocs/theme/theme_bloc.dart';
+import 'package:blocoverview/blocs/color_bloc/color_bloc.dart';
 import 'package:blocoverview/cubits/color_cubit/color_cubit.dart';
 import 'package:blocoverview/cubits/theme_cubit/theme_cubit.dart';
+import 'package:blocoverview/screens/bloc_com_homepage.dart';
 import 'package:blocoverview/screens/cubit_com_homepage.dart';
 import 'package:blocoverview/screens/event_homepage.dart';
 import 'package:flutter/material.dart';
@@ -21,18 +23,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<ColorCubit>(
-          create: (context) => ColorCubit(),
+        BlocProvider<ColorBloc>(
+          create: (context) => ColorBloc(),
         ),
-        BlocProvider<CounterCubit>(
-          create: (context) => CounterCubit(),
+        BlocProvider<CounterBlocBloc>(
+          create: (context) => CounterBlocBloc(
+            colorBloc: context.read<ColorBloc>(),
+          ),
         ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(),
         title: 'Cubit to Cubit',
-        home: CubitComHomepage(),
+        home: BlocComHomepage(),
       ),
     );
   }
