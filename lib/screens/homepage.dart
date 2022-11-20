@@ -8,11 +8,29 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Material App Bar'),
+      body: Center(
+        child: Text(
+          '0',
+          style: Theme.of(context).textTheme.headline4,
+        ),
       ),
-      body: const Center(
-        child: Text('Hello World'),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {},
+            child: Icon(Icons.add),
+            heroTag: "Increment",
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          FloatingActionButton(
+            onPressed: () {},
+            child: Icon(Icons.remove),
+            heroTag: "Decrement",
+          )
+        ],
       ),
     );
   }
