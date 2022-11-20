@@ -1,5 +1,6 @@
 // import 'package:blocoverview/blocs/theme/theme_bloc.dart';
 import 'package:blocoverview/screens/bloc_access_homepage.dart';
+import 'package:blocoverview/screens/counter_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:blocoverview/cubits/counter_cubit/counter_cubit.dart';
@@ -18,25 +19,105 @@ void main() {
   runApp(MyApp());
 }
 
-// Anonymous Route ve Bloc Access
-class MyApp extends StatelessWidget {
+// Ongenerate Route ve Bloc Access
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final CounterCubit _counterCubit = CounterCubit();
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CounterCubit>(
-      create: (context) => CounterCubit(),
-      child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(),
-          title: 'Cubit to Cubit',
-          home: BlocProvider<CounterCubit>(
-            create: (context) {
-              return CounterCubit();
-            },
-            child: BlocAccessHomepage(),
-          )),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(),
+      title: 'Cubit to Cubit',
+      onGenerateRoute: (settings) {
+        switch (settings.name) {
+          case "/":
+            return MaterialPageRoute(
+              builder: (context) => BlocProvider.value(
+                value: _counterCubit,
+                child: BlocAccessHomepage(),
+              ),
+            );
+          case "/counter":
+            return MaterialPageRoute(
+              builder: (context) => BlocProvider.value(
+                value: _counterCubit,
+                child: ShowMeCounter(),
+              ),
+            );
+          default:
+            return null;
+        }
+      },
     );
   }
+
+  @override
+  void dispose() {
+    _counterCubit.close();
+    super.dispose();
+  }
 }
+
+// // Named Route ve Bloc Access
+// class MyApp extends StatefulWidget {
+//   @override
+//   State<MyApp> createState() => _MyAppState();
+// }
+
+// class _MyAppState extends State<MyApp> {
+//   final CounterCubit _counterCubit = CounterCubit();
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       theme: ThemeData(),
+//       title: 'Cubit to Cubit',
+//       routes: {
+//         '/': (context) => BlocProvider.value(
+//               value: _counterCubit,
+//               child: BlocAccessHomepage(),
+//             ),
+//         '/counter': (context) => BlocProvider.value(
+//               value: _counterCubit,
+//               child: ShowMeCounter(),
+//             ),
+//       },
+//     );
+//   }
+
+//   @override
+//   void dispose() {
+//     _counterCubit.close();
+//     super.dispose();
+//   }
+// }
+
+// // Anonymous Route ve Bloc Access
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocProvider<CounterCubit>(
+//       create: (context) => CounterCubit(),
+//       child: MaterialApp(
+//           debugShowCheckedModeBanner: false,
+//           theme: ThemeData(),
+//           title: 'Cubit to Cubit',
+//           home: BlocProvider<CounterCubit>(
+//             create: (context) {
+//               return CounterCubit();
+//             },
+//             child: BlocAccessHomepage(),
+//           )),
+//     );
+//   }
+// }
 
 
 // // Cubit ve Bloc Access
@@ -147,7 +228,6 @@ class MyApp extends StatelessWidget {
 //   }
 // }
  
-
 // //BlocBuilder Versiyonu
 // class MyApp extends StatelessWidget {
 //   @override
@@ -183,7 +263,6 @@ class MyApp extends StatelessWidget {
 //     );
 //   }
 // }
-
 
 // //Cubit Versiyonu
 //  class MyApp extends StatelessWidget {

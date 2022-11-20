@@ -15,14 +15,7 @@ class BlocAccessHomepage extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (counterContext) {
-                    return BlocProvider.value(
-                      value: context.read<CounterCubit>(),
-                      child: ShowMeCounter(),
-                    );
-                  },
-                ));
+                Navigator.of(context).pushNamed('/counter');
               },
               child: Text(
                 "Show Me",
@@ -44,6 +37,49 @@ class BlocAccessHomepage extends StatelessWidget {
     );
   }
 }
+
+// //Anonymous Bloc Access
+// class BlocAccessHomepage extends StatelessWidget {
+//   const BlocAccessHomepage({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             ElevatedButton(
+//               onPressed: () {
+//                 Navigator.of(context).push(MaterialPageRoute(
+//                   builder: (counterContext) {
+//                     return BlocProvider.value(
+//                       value: context.read<CounterCubit>(),
+//                       child: ShowMeCounter(),
+//                     );
+//                   },
+//                 ));
+//               },
+//               child: Text(
+//                 "Show Me",
+//                 style: Theme.of(context).textTheme.bodyText2,
+//               ),
+//             ),
+//             ElevatedButton(
+//               onPressed: () {
+//                 BlocProvider.of<CounterCubit>(context).increment();
+//               },
+//               child: Text(
+//                 "Increment",
+//                 style: Theme.of(context).textTheme.bodyText2,
+//               ),
+//             )
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 // //Bloc Access
 // class BlocAccessHomepage extends StatelessWidget {
