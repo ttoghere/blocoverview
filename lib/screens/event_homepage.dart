@@ -1,7 +1,5 @@
 import 'dart:math';
-
-import 'package:blocoverview/blocs/theme/theme_bloc.dart';
-import 'package:blocoverview/cubits/theme/theme_cubit.dart';
+import 'package:blocoverview/cubits/theme_cubit/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
