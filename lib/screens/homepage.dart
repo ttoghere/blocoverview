@@ -10,7 +10,8 @@ class Homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var blocProvider = BlocProvider.of<CounterCubit>(context, listen: true);
+    //BlocProvider tanımlama -- Sayfa için geçerlidir ama eski tip kullanım
+    // var blocProvider = BlocProvider.of<CounterCubit>(context, listen: true);
     return Scaffold(
       //BlocListener kapsamı olana BlocConsumer
       //Provider Consumer Widget'ı ile Bloc için aynı işlevi sağlar
@@ -45,7 +46,9 @@ class Homepage extends StatelessWidget {
         children: [
           FloatingActionButton(
             onPressed: () {
-              blocProvider.increment();
+              //BlocProvider tanımlamasının listen parametresi true olan seçenek
+              //Methodlar için kullanılır
+              context.read<CounterCubit>().increment();
             },
             child: Icon(Icons.add),
             heroTag: "Increment",
@@ -55,7 +58,7 @@ class Homepage extends StatelessWidget {
           ),
           FloatingActionButton(
             onPressed: () {
-              blocProvider.decrement();
+              context.read<CounterCubit>().decrement();
             },
             child: Icon(Icons.remove),
             heroTag: "Decrement",
